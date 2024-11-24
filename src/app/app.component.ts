@@ -5,14 +5,14 @@ import { LeftSidebarComponent } from "./left-sidebar/left-sidebar.component";
 import { FeedComponent } from "./feed/feed.component";
 import { RightSidebarComponent } from "./right-sidebar/right-sidebar.component";
 import { FooterComponent } from './footer/footer.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';  
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 // import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule ,RouterOutlet, HeaderComponent, LeftSidebarComponent, FeedComponent, RightSidebarComponent, FooterComponent, HttpClientModule],
+  imports: [HttpClientModule, CommonModule ,RouterOutlet, HeaderComponent, LeftSidebarComponent, FeedComponent, RightSidebarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
