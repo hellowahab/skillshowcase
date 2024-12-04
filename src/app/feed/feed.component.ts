@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { PostComponent } from "./post/post.component";
 import { PostService } from '../services/post.service';
 import { NgFor } from '@angular/common';
+import { GeminiGoogleAiService } from '../services/gemini-google-ai.service.ts.service';
 
 @Component({
   selector: 'app-feed',
@@ -11,13 +12,16 @@ import { NgFor } from '@angular/common';
   styleUrl: './feed.component.scss'
 })
 export class FeedComponent {
+  @ViewChild('CreatePostInput') CreatePostInput!: ElementRef;
   posts: any = []; // Array of posts
   errorMessage: string = ''; // Error message to display
 
   // Constructor to inject the service
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService,
+    private geminiGoogleAiService: GeminiGoogleAiService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.getPosts();
   }
 
@@ -32,4 +36,18 @@ export class FeedComponent {
       }
     })
   }
+
+  rewriteWithAI(){
+    console.log(this.CreatePostInput.nativeElement.value);
+    this.askGemini(this.CreatePostInput.nativeElement.value);
+  }
+
+  askGemini(question: string){
+    this.geminiGoogleAiService.AskGemini(question)
+    .then((response: string) => {
+      console.log(response);
+      this.CreatePostInput.nativeElement.value = response;
+    }
+    )};
+
 }
