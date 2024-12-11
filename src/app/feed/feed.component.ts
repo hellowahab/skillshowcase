@@ -3,6 +3,7 @@ import { PostComponent } from "./post/post.component";
 import { PostService } from '../services/post.service';
 import { NgFor } from '@angular/common';
 import { GeminiGoogleAiService } from '../services/gemini-google-ai.service.ts.service';
+import { Post } from './post/models/post.model';
 
 @Component({
   selector: 'app-feed',
@@ -48,6 +49,26 @@ export class FeedComponent {
       console.log(response);
       this.CreatePostInput.nativeElement.value = response;
     }
-    )};
+  )};
 
+  savePost() { 
+    const newPost: Post = {
+      title: this.CreatePostInput.nativeElement.value,
+      author: 'Gemini',
+      createdDate: new Date(),
+      content: this.CreatePostInput.nativeElement.value,
+      id: 0,
+      privacyLevel: 'public',
+      UserId: 1
+    }
+
+    this.postService.savePost(newPost).subscribe(
+      (response: any) => {
+        console.log(response);        
+      },
+      (error: any) => {
+        console.log(error);
+      }    
+    );
+  }
 }

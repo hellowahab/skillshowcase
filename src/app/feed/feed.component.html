@@ -1,12 +1,13 @@
 <!-- Main Content Area -->
 <section class="feed">
     <div class="post-creator">
-        <textarea rows="20" cols="80" type="text" #CreatePostInput placeholder="What do you want to talk about?"></textarea>
+        <textarea rows="10" cols="80" type="text" #CreatePostInput placeholder="What do you want to talk about?"></textarea>
         <div class="post-options">
             <button><i class="fas fa-image"></i> Photo</button>
             <button><i class="fas fa-video"></i> Video</button>
             <button><i class="fas fa-poll"></i> Poll</button>
             <button (click)="rewriteWithAI()" ><i class="fas fa-poll"></i> Rewrite with AI</button>
+            <button (click)="savePost()" ><i class="fas fa-poll"></i> Save Post</button>
         </div>
     </div>
     <app-post
